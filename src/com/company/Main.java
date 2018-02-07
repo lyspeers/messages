@@ -1,11 +1,16 @@
 package com.company;
 
+import java.time.*;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
+
+
         messageList.newChat("jack", "hey");
         System.out.println(messageList.messages.get("jack"));
         while(true){

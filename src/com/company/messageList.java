@@ -1,21 +1,18 @@
 package com.company;
  import java.util.*;
+import java.text.SimpleDateFormat;
 /**
  * Created by ls059 on 2/5/18.
  */
 public class messageList {
-    //static String g[] = {"hi"};
-    //static String h[] = {"hello"};
 
-    static Map<String, ArrayList<String>> messages = new HashMap<>();
+    static Map<String, Map<Integer, String>> messages = new HashMap<>();
     public messageList(){
 
     }
 
     static void newChat(String n, String m){
 
-        messages.put(n, new ArrayList<>());
-        messages.get(n).add(m);
     }
     static void oldChat(String n){
         for(int i = messages.get(n).size(); i > 0; i--){
@@ -33,7 +30,24 @@ public class messageList {
         String m = message.nextLine();
 
         String c = s + " :" + m;
-        messages.get(n).add(c);
+
+        sortByValue(messages.get(n));
+    }
+    public static <K, V extends Comparable<? super V>> Map<K, V>
+    sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
+        Collections.sort( list, new Comparator<Map.Entry<K, V>>() {
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o1.getValue()).compareTo( o2.getValue() );
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<K, V>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+        return result;
     }
 
 }
+
