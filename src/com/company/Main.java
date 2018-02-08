@@ -11,15 +11,35 @@ public class Main {
 	// write your code here
 
 
-        messageList.newChat("jack", "hey");
-        System.out.println(messageList.messages.get("jack"));
+
+
         while(true){
             Scanner use = new Scanner(System.in);
-            System.out.println("Would you like to : Start a new message(start), or continue a chat(continue)");
+            System.out.println("Would you like to: Start a new message(start), or continue a chat(continue)");
             String mode = use.next();
             if(mode.equalsIgnoreCase("start")){
+                System.out.println("Who is sending the message");
+                Scanner sender = new Scanner(System.in);
+                String s = sender.next();
 
+                System.out.println("Who is receiving the message");
+                Scanner reciver = new Scanner(System.in);
+                String r = reciver.next();
+
+                System.out.println("What is the message being sent");
+                Scanner message = new Scanner(System.in);
+                String m = reciver.next();
+                messageList.newChat(r, s, m);
             }else if(mode.equalsIgnoreCase("continue")){
+                System.out.println("Who is sending the message");
+                Scanner sender = new Scanner(System.in);
+                String s = sender.next();
+
+                System.out.println("Who is receiving the message");
+                Scanner reciver = new Scanner(System.in);
+                String r = reciver.next();
+                messageList.chat(r,s);
+
 
             }else{
                 System.out.println("Please input the correct operation.");
