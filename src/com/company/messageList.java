@@ -19,7 +19,8 @@ public class messageList {
     }
 
     public static void chat(String n, String s){
-        showConversation(n, s);
+        if(messages.containsKey(n+s) && messages.containsKey(s+n))
+            showConversation(n, s);
 
         Scanner message = new Scanner(System.in);
         System.out.println("Enter your message here");
@@ -29,8 +30,7 @@ public class messageList {
 
 
     }
-    public static <K, V extends Comparable<? super V>> Map<K, V>
-    sortByValue(Map<K, V> map) {
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
         List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
         Collections.sort( list, new Comparator<Map.Entry<K, V>>() {
             public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
@@ -46,7 +46,7 @@ public class messageList {
     }
 
     public static void showConversation(String n, String s) {
-        Map<Long, String> conversation = Stream.concat(messages.get(n).entrySet().stream(), messages.get(s).entrySet().stream())
+        Map<Long, String> conversation = Stream.concat(messages.get(n + s).entrySet().stream(), messages.get(s+n).entrySet().stream())
                 .collect(Collectors.toMap(
                         entry -> entry.getKey(), // The key
                         entry -> entry.getValue() // The value
@@ -56,8 +56,6 @@ public class messageList {
         sortByValue(messages.get(n + s));
         for (Map.Entry<Long, String> e : messages.get(n+s).entrySet()) {
             System.out.println(e.getValue());
-            e.getValue();
-            System.out.println(e);
         }
     }
 }
